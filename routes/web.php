@@ -33,5 +33,6 @@ Route::get('/about', function () {
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    $users = \App\Models\User::all();
+    return view('dashboard', compact('users'));
 })->name('dashboard');
