@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @method static insert(array $array)
  * @method static find($id)
+ * @method static latest()
  */
 class Category extends Model
 {

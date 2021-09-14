@@ -12,7 +12,8 @@ class CategoryController extends Controller
     public function allCat()
     {
         $categories = Category::latest()->paginate(5);
-        return view('admin.category.index', compact('categories'));
+        $trashCat = Category::onlyTrashed()->latest()->paginate(5);
+        return view('admin.category.index', compact('categories', 'trashCat'));
     }
 
     public function addCat(Request $request)
@@ -50,5 +51,23 @@ class CategoryController extends Controller
             'user_id' => Auth::user()->id
         ]);
         return Redirect()->route('all.category')->with('success', 'Назву категорії змінено на: ' . $request->category_name . '.');
+    }
+
+    public function softDeleteCat($id)
+    {
+        $delete = Category::find($id)->delete();
+        return Redirect()->back()->with('success', 'Категорію переміщено в корзину.');
+    }
+
+    public function restoreCat($id)
+    {
+        $delete = Category::withTrashed()->find($id)->restore();
+        return Redirect()->back()->with('success', 'Категорію відновлено.');
+    }
+
+    public function DeleteCat($id)
+    {
+        $delete = Category::onlyTrashed()->find($id)->forceDelete();
+        return Redirect()->back()->with('success', 'Категорію видалено остаточно.');
     }
 }
