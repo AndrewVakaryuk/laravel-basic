@@ -36,4 +36,19 @@ class CategoryController extends Controller
 //        $category->save();
         return Redirect()->back()->with('success', 'Категорія: ' . $request->category_name . ' успішно додана');
     }
+
+    public function editCat($id)
+    {
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
+    }
+
+    public function updateCat(Request $request, $id)
+    {
+        $update = Category::find($id)->update([
+            'category_name' => $request->category_name,
+            'user_id' => Auth::user()->id
+        ]);
+        return Redirect()->route('all.category')->with('success', 'Назву категорії змінено на: ' . $request->category_name . '.');
+    }
 }
