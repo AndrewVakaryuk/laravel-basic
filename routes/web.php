@@ -36,7 +36,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/category/all', [CategoryController::class, 'allCat'])->name('all.category');
 Route::post('/category/add', [CategoryController::class, 'addCat'])->name('store.category');
-
 Route::get('/category/edit/{id}', [CategoryController::class, 'editCat']);
 Route::post('/category/update/{id}', [CategoryController::class, 'updateCat']);
 Route::get('/category/softdelete/{id}', [CategoryController::class, 'softDeleteCat']);
@@ -45,6 +44,8 @@ Route::get('/category/restore/{id}', [CategoryController::class, 'deleteCat']);
 
 //For Brand
 Route::get('/brand/all', [BrandController::class, 'allBrand'])->name('all.brand');
+Route::post('/brand/add', [BrandController::class, 'addBrand'])->name('store.brand');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = \App\Models\User::all();
