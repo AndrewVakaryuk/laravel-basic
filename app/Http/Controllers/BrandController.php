@@ -40,4 +40,10 @@ class BrandController extends Controller
         ]);
         return Redirect()->back()->with('success', 'Бренд: ' . $request->brand_name . ' успішно доданий');
     }
+
+    public function editBrand($id)
+    {
+        $brand = Brand::find($id);
+        return view('admin.brand.edit', compact('brand'));
+    }
 }

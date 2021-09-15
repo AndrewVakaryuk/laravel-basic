@@ -45,6 +45,7 @@ Route::get('/category/restore/{id}', [CategoryController::class, 'deleteCat']);
 //For Brand
 Route::get('/brand/all', [BrandController::class, 'allBrand'])->name('all.brand');
 Route::post('/brand/add', [BrandController::class, 'addBrand'])->name('store.brand');
+Route::get('/brand/edit/{id}', [BrandController::class, 'editBrand']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
