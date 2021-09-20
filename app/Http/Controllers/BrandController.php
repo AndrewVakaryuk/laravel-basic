@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Multipic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Facades\Image;
@@ -97,5 +98,37 @@ class BrandController extends Controller
         unlink($image);
         Brand::find($id)->delete();
         return Redirect()->back()->with('success', 'Бренд успішно видалений');
+    }
+    public function multiPic()
+    {
+        $images = Multipic::all();
+        return view('admin.multipic.index', compact('images'));
+    }
+
+    public function storeImg(Request $request)
+    {
+//        $validated = $request->validate([
+//            'brand_name' => 'required|unique:brands|min:4',
+//            'brand_image' => 'required|mimes:jpg,jpeg,png',
+//        ],
+//            [
+//                'brand_name.required' => 'Тексту дай!!!',
+//                'brand_name.unique' => 'Уже було!!!',
+//                'brand_name.min' => 'Потрібно ввести більше 4 символів!!!',
+//            ]);
+        $image = $request->file('image');
+        foreach ($image as $multi_image) {
+
+            $name_gen = hexdec(uniqid()) . '.' . $multi_image->getClientOriginalExtension();
+            $last_img = 'image/multi/' . $name_gen;
+            Image::make($multi_image)->resize(300, 300)->save($last_img);
+
+
+            Multipic::insert([
+                'image' => $last_img,
+                'created_at' => Carbon::now()
+            ]);
+        }
+        return Redirect()->back()->with('success', 'Файли успішно додано');
     }
 }

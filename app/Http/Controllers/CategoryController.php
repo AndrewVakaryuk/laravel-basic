@@ -65,7 +65,7 @@ class CategoryController extends Controller
         return Redirect()->back()->with('success', 'Категорію відновлено.');
     }
 
-    public function DeleteCat($id)
+    public function deleteCat($id)
     {
         $delete = Category::onlyTrashed()->find($id)->forceDelete();
         return Redirect()->back()->with('success', 'Категорію видалено остаточно.');

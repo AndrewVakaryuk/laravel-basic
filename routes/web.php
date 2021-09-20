@@ -39,8 +39,8 @@ Route::post('/category/add', [CategoryController::class, 'addCat'])->name('store
 Route::get('/category/edit/{id}', [CategoryController::class, 'editCat']);
 Route::post('/category/update/{id}', [CategoryController::class, 'updateCat']);
 Route::get('/category/softdelete/{id}', [CategoryController::class, 'softDeleteCat']);
-Route::get('/category/delete/{id}', [CategoryController::class, 'DeleteCat']);
-Route::get('/category/restore/{id}', [CategoryController::class, 'deleteCat']);
+Route::get('/category/delete/{id}', [CategoryController::class, 'deleteCat']);
+Route::get('/category/restore/{id}', [CategoryController::class, 'restoreCat']);
 
 //For Brand
 Route::get('/brand/all', [BrandController::class, 'allBrand'])->name('all.brand');
@@ -49,6 +49,9 @@ Route::get('/brand/edit/{id}', [BrandController::class, 'editBrand']);
 Route::post('/brand/update/{id}', [BrandController::class, 'updateBrand']);
 Route::get('/brand/delete/{id}', [BrandController::class, 'deleteBrand']);
 
+// Multi image
+Route::get('/multi/images', [BrandController::class, 'multiPic'])->name('multi.image');
+Route::post('/multi/add', [BrandController::class, 'storeImg'])->name('store.image');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = \App\Models\User::all();
