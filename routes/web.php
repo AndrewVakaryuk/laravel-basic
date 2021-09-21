@@ -62,5 +62,5 @@ Route::get('/email/verify', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = \App\Models\User::all();
-    return view('dashboard', compact('users'));
+    return view('admin.index');
 })->name('dashboard');
