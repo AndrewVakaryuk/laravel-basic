@@ -34,15 +34,20 @@
                                     <label for="image">Brand Image</label>
                                     <input type="file" name="image[]" class="form-control" id="image" aria-describedby="emailHelp" multiple="">
 
-                                    @error('image')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
 
                                 </div>
                                 <button type="submit" class="btn btn-primary">Add Images                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </button>
                             </form>
                         </div>
-
 
                     </div>
                 </div>

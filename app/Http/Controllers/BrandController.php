@@ -107,22 +107,17 @@ class BrandController extends Controller
 
     public function storeImg(Request $request)
     {
-//        $validated = $request->validate([
-//            'brand_name' => 'required|unique:brands|min:4',
-//            'brand_image' => 'required|mimes:jpg,jpeg,png',
-//        ],
-//            [
-//                'brand_name.required' => 'Тексту дай!!!',
-//                'brand_name.unique' => 'Уже було!!!',
-//                'brand_name.min' => 'Потрібно ввести більше 4 символів!!!',
-//            ]);
+        $request->validate(
+            [
+                'image' => 'required',
+                'image.*' => 'mimes:jpeg,jpg,png'
+            ]);
         $image = $request->file('image');
         foreach ($image as $multi_image) {
 
             $name_gen = hexdec(uniqid()) . '.' . $multi_image->getClientOriginalExtension();
             $last_img = 'image/multi/' . $name_gen;
             Image::make($multi_image)->resize(300, 300)->save($last_img);
-
 
             Multipic::insert([
                 'image' => $last_img,

@@ -53,6 +53,13 @@ Route::get('/brand/delete/{id}', [BrandController::class, 'deleteBrand']);
 Route::get('/multi/images', [BrandController::class, 'multiPic'])->name('multi.image');
 Route::post('/multi/add', [BrandController::class, 'storeImg'])->name('store.image');
 
+//email verification
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = \App\Models\User::all();
     return view('dashboard', compact('users'));
