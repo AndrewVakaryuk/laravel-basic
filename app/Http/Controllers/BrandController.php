@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Multipic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 
 class BrandController extends Controller
@@ -130,5 +131,11 @@ class BrandController extends Controller
             ]);
         }
         return Redirect()->back()->with('success', 'Файли успішно додано');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Redirect()->route('login')->with('success', 'User Logout');
     }
 }
