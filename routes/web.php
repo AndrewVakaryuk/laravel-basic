@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $brands = \App\Models\Brand::all();
-    return view('home', compact('brands'));
+    $sliders = \App\Models\Slider::all();
+    return view('home', compact('brands', 'sliders'));
 });
 
 //Route::get('/home', function () {
@@ -68,3 +70,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/user/logout', [BrandController::class, 'logout'])->name('user.logout');
 
+//admin all routes
+Route::get('/home/slider', [HomeController::class, 'homeSlider'])->name('home.slider');
+Route::get('/add/slider', [HomeController::class, 'addSlider'])->name('add.slider');
+Route::post('/store/slider', [HomeController::class, 'storeSlider'])->name('store.slider');
