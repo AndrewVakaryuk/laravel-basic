@@ -22,7 +22,8 @@ Route::get('/', function () {
     $brands = \App\Models\Brand::all();
     $sliders = \App\Models\Slider::all();
     $homeAbout = \App\Models\HomeAbout::all()->first();
-    return view('home', compact('brands', 'sliders', 'homeAbout'));
+    $images = \App\Models\Multipic::all();
+    return view('home', compact('brands', 'sliders', 'homeAbout', 'images'));
 });
 
 //Route::get('/home', function () {
@@ -84,3 +85,6 @@ Route::post('/store/about', [AboutController::class, 'storeAbout'])->name('store
 Route::get('/about/edit/{id}', [AboutController::class, 'editAbout']);
 Route::post('/update/homeabout/{id}', [AboutController::class, 'updateAbout']);
 Route::get('/about/delete/{id}', [AboutController::class, 'deleteAbout']);
+
+// Portfolio
+Route::get('/portfolio', [AboutController::class, 'portfolio'])->name('portfolio');
