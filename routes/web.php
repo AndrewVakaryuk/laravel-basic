@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $brands = \App\Models\Brand::all();
+    return view('home', compact('brands'));
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+//Route::get('/home', function () {
+//    return view('home');
+//});
 
 Route::get('/about', function () {
     return view('about');
