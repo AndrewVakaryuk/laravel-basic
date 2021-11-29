@@ -7,7 +7,7 @@
 
                 <div class="col-md-12 mb-2">
                     <h2 class="d-inline">Contact Page</h2>
-                    <a href="{{ route('add.about') }}" class="float-right">
+                    <a href="{{ route('add.contact') }}" class="float-right">
                         <button class="btn btn-info">Add Contact</button>
                     </a>
                 </div>
@@ -47,8 +47,8 @@
                                     <td>{{ $con->email }}</td>
                                     <td>{{ $con->phone }}</td>
                                     <td>
-                                        <a href="{{ url('contact/edit/' . $con->id) }}" class="btn btn-info">Edit</a>
-                                        <a href="{{ url('contact/delete/' . $con->id) }}" onclick="return confirm('Впевнений?')" class="btn btn-danger">Delete</a>
+                                        <a href="#" class="btn btn-info">Edit</a>
+                                        <a href="#" onclick="return confirm('Впевнений?')" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
